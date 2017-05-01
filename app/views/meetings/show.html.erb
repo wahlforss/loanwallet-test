@@ -1,0 +1,20 @@
+<p>
+  Title:
+  <%= @meeting.title %>
+</p>
+<p>
+  Date:
+  <%= @meeting.date %>
+</p>
+<p>
+  Room:
+  <%= @meeting.room %>
+</p>
+<p>
+  Participants:
+  <% @participants.each do |p| %>
+    <%= content_tag( :div, p.name , style: "color: #{p.color};") %>
+  <% end %>
+</p>
+
+<%= link_to 'Back', meetings_path %>

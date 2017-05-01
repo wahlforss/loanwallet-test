@@ -1,0 +1,19 @@
+<!-- 
+Displays all the meetings. -->
+<% @meetings.each do |meet| %>
+  <div>
+    <p><strong>Title:</strong> <%= meet.title %></p>
+    <p><strong>Date:</strong> <%= meet.date %></p>
+    <p><strong>Participants: </strong> <%= meet.participants %></p>
+    <p><strong>Room:</strong> <%= meet.room %></p>
+    <p><%= link_to 'Show', meeting_path(meet) %></p>
+    <p><%= link_to 'Edit', edit_meeting_path(meet) %></p>
+    <p>
+      <%= link_to 'Destroy', meeting_path(meet),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+    </p>
+  </div>
+<% end %>
+
+<%= link_to 'New meeting', new_meeting_path %>

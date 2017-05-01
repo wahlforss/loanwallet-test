@@ -1,0 +1,40 @@
+<!-- div used to send data from rails to javascript -->
+<%= content_tag 'div', id: 'participants', data: @participants_name_array do %>
+<% end %>
+<!-- Form for adding participants to the model, so that color of participants stay consistent -->
+<%= form_for :participant, url: participants_path, remote: true do |f| %>
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'auto' %>
+  </p>
+  <%= f.submit "Add participants", id: "p_submit" %>
+<% end %>
+<!-- div which contains all the participants already added -->
+<div class="p_block">
+  <% @participants.each do |p| %>
+    <%= content_tag( :div, p.name , style: "color: #{p.color};", class: "part") %>
+  <% end %>
+</div>
+
+<!-- form for changing the meeting -->
+<%= form_for (@meeting) do |f| %>
+  <p>
+    <%= f.label :title %> <br>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :room %> <br>
+    <%= f.text_field :room %>
+  </p>
+  <p>
+    <%= f.label :date %> <br>
+    <%= f.datetime_select :date %>
+  </p>
+  <!-- used as a tag for sending participants to the meeting model -->
+  <%= hidden_field_tag(:subaction, 'Hidden', id: "hidden") %>
+  <p>
+    <%= f.submit "Change meeting"%>
+  </p>
+<% end %>
+
+<%= link_to 'Back', meetings_path %>
